@@ -18,7 +18,7 @@ class Queries(BaseModel):
 
 class SearchResult(BaseModel):
     query: Query = Field(..., description="The search query that was used to retrieve the raw content")
-    raw_content: list[str] = Field(..., description="The raw content retrieved from the search")
+    raw_content: List[str] = Field(..., description="The raw content retrieved from the search")
 
 class Feedback(BaseModel):
     feedback: Union[str, bool] = Field(..., description="Feedback on the report structure. If the content is good for the section, return True (boolean), otherwise return a string of feedback on what is missing or incorrect.")
