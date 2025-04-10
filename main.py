@@ -12,8 +12,8 @@ def main():
             "max_queries": 2,
             "search_depth": 2,
             "num_reflections": 2,
-            "provider": "openai",
-            "model": "gpt-4o-mini",
+            "provider": "ollama",
+            "model": "gemma3:4b",
             "temperature": 0.3
         }
     }
