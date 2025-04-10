@@ -124,8 +124,7 @@ def section_knowledge_node(state: ResearchState, config: RunnableConfig):
 
     result = section_knowledge_llm.invoke(state)
 
-    with open("agent_int_logs.txt", "a") as f:
-        f.write(f"Section: {state['section']}\n")
+    with open(f"logs/{state['section'].section_name}.txt", "a", encoding="utf-8") as f:
         f.write(f"Knowledge: {result.content}\n\n")
 
     return {"knowledge": result.content}
@@ -155,8 +154,7 @@ def query_generator_node(state: ResearchState, config: RunnableConfig):
 
     result = query_generator_llm.invoke(state)
 
-    with open("agent_int_logs.txt", "a") as f:
-        f.write(f"Section: {state['section']}\n")
+    with open(f"logs/{state['section'].section_name}.txt", "a", encoding="utf-8") as f:
         f.write(f"Generated Queries: {result.queries}\n\n")
 
     return {"generated_queries": result.queries, "searched_queries": result.queries}
@@ -178,8 +176,7 @@ def tavily_search_node(state: ResearchState, config: RunnableConfig):
                 raw_content.append(result['raw_content'])
         search_results.append(SearchResult(query=query, raw_content=raw_content) if raw_content else None)
 
-    with open("agent_int_logs.txt", "a") as f:
-        f.write(f"Section: {state['section']}\n")
+    with open(f"logs/{state['section'].section_name}.txt", "a", encoding="utf-8") as f:
         f.write(f"Search Results: {search_results}\n\n")
 
     return {"search_results": search_results}
@@ -202,8 +199,7 @@ def result_accumulator_node(state: ResearchState, config: RunnableConfig):
 
     result = result_accumulator_llm.invoke(state)
 
-    with open("agent_int_logs.txt", "a") as f:
-        f.write(f"Section: {state['section']}\n")
+    with open(f"logs/{state['section'].section_name}.txt", "a", encoding="utf-8") as f:
         f.write(f"Accumulated Content: {result.content}\n\n")
 
     return {**state, "accumulated_content": result.content}
@@ -231,8 +227,7 @@ def reflection_feedback_node(
     result = reflection_feedback_llm.invoke(state)
     feedback = result.feedback
 
-    with open("agent_int_logs.txt", "a") as f:
-        f.write(f"Section: {state['section']}\n")
+    with open(f"logs/{state['section'].section_name}.txt", "a", encoding="utf-8") as f:
         f.write(f"Reflection Feedback: {feedback}\n\n")
 
     if (feedback == True) or (feedback.lower() == "true") or (reflection_count < configurable.num_reflections):
@@ -278,8 +273,7 @@ def final_section_formatter_node(state: ResearchState, config: RunnableConfig):
 
     result = final_section_formatter_llm.invoke(state_dict)
 
-    with open("agent_int_logs.txt", "a") as f:
-        f.write(f"Section: {state['section']}\n")
+    with open(f"logs/{state['section'].section_name}.txt", "a", encoding="utf-8") as f:
         f.write(f"Final Section Content: {result.content}\n\n")
 
     return {"final_section_content": [result.content]}
