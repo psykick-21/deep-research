@@ -59,6 +59,7 @@ You must output the result in the presented structure
 - Organize these into a JSON array with each object containing:
   "section_name": The main section title
   "sub_sections": An array of comprehensive subsection descriptions
+- STRICTLY DO NOT CREATE THE SECTIONS FOR CONCLUSION AND REFERENCES.
 
 # Content Condensation Guidelines:
 
@@ -67,6 +68,7 @@ You must output the result in the presented structure
 - Use phrases like "overview of", "including", "focusing on", "covering", etc. to connect concepts
 - Maintain the key terminology from the original structure
 - Aim for descriptive phrases rather than just lists of topics
+- REMEMBER: STRICTLY DO NOT CREATE THE SECTIONS FOR CONCLUSION AND REFERENCES.
 
 # Example Transformation:
 ## From:
@@ -212,6 +214,7 @@ For each SearchResult provided:
    - Main concepts, definitions, and relationships
    - Supporting evidence, statistics, or examples
    - Credible sources or authorities mentioned
+   - Formulae, equations, and mathematical notations
 
 2. FILTER OUT:
    - Irrelevant website navigation elements and menus
@@ -235,14 +238,14 @@ For each SearchResult provided:
    - Maintaining appropriate context
 
 ## Guidelines
-- Focus on accuracy and relevance
 - Maintain neutrality and balance in presenting information
 - Preserve technical precision when dealing with specialized topics
 - Note explicitly when information appears contradictory or uncertain
 - When information appears to be from commercial sources, note potential bias
 - Prioritize more recent information over older content
 - Maintain proper attribution when specific sources are referenced
-- NO IMPORTANT DETAILS SHOULD BE LEFT OUT. BE DETAILED AND THOROUGH.
+- NO IMPORTANT DETAILS SHOULD BE LEFT OUT. YOU MUST BE DETAILED, THOROUGH AND COMPREHENSIVE.
+- DO NOT TRY TO OVERSIMPLIFY ANY TOPIC. COMPREHENSIVENESS IS KEY. IT IS GOING TO BE USED IN A RESEARCH REPORT.
 """
 
 
@@ -327,6 +330,7 @@ Synthesize these information sources into cohesive section content by:
    - Supporting evidence, examples, and case studies
    - Current trends, developments, and applications
    - Relevant controversies, debates, or alternative perspectives
+   - Formulae, equations, and mathematical notations
 
 2. INTEGRATE THE INFORMATION by:
    - Combining complementary information from both sources
@@ -343,14 +347,13 @@ Synthesize these information sources into cohesive section content by:
    - Incorporating relevant examples to illustrate key points
 
 4. PRIORITIZE QUALITY by:
-   - Favoring accuracy over quantity
    - Ensuring information is current and reflects the latest understanding
    - Presenting balanced perspectives on controversial topics
    - Maintaining appropriate technical language without unnecessary jargon
    - Supporting claims with evidence or reasoning
 
 ## Output
-Produce detailed, well-structured section content that:
+Produce detailed, comprehensive, well-structured section content that:
 - Begins with a concise introduction to the topic
 - Organizes information into coherent paragraphs with clear topic sentences
 - Uses appropriate subheadings to improve readability and organization
@@ -361,13 +364,16 @@ Produce detailed, well-structured section content that:
 - Write in a clear, authoritative, and professional tone
 - Use precise terminology appropriate to the subject matter
 - Ensure logical flow between concepts and paragraphs
-- Maintain appropriate technical depth based on the apparent audience level
+- Maintain technical depth
 - Include specific details, statistics, and examples where they add value
 - Avoid unnecessary repetition while reinforcing key concepts
 - Balance technical accuracy with readability
 - Present multiple perspectives on contested topics where relevant
 - Synthesize rather than merely concatenate information from the two sources
 - Ensure the final content could stand alone as an authoritative resource on the topic
+- NO IMPORTANT DETAILS SHOULD BE LEFT OUT. YOU MUST BE DETAILED, THOROUGH AND COMPREHENSIVE.
+- DO NOT TRY TO OVERSIMPLIFY ANY TOPIC. COMPREHENSIVENESS IS KEY. IT IS GOING TO BE USED IN A RESEARCH REPORT.
+- STRICTLY DO NOT CREATE A CONCLUSION OR REFERENCES SECTION.
 
 ## Example Structure
 [Section Title]
@@ -383,103 +389,71 @@ Produce detailed, well-structured section content that:
 [Supporting evidence, examples, or case studies]
 
 [Additional subheadings as needed]
+"""
 
-[Concluding paragraph summarizing key points and implications]"""
 
 
-FINAL_REPORT_WRITER_SYSTEM_PROMPT_TEMPLATE = """You are a specialized agent responsible for assembling the final comprehensive research report from individual section contents. Your task is to transform separate section content into a cohesive, detailed, and authoritative research document that maintains the highest standards of academic and professional quality.
+FINALIZER_SYSTEM_PROMPT_TEMPLATE = """You are a specialized agent responsible for creating a comprehensive conclusion and selecting the most relevant references for a research report. Your task is to synthesize insights from all section content to create a powerful conclusion, and to identify the most crucial references that support the report's key findings.
 
 ## Input
 You will receive:
-1. The complete report structure (including section names, numbers, and descriptions)
-2. A list of strings containing the curated content for each section
+1. A list of strings containing the content of all sections in the research report
+2. A list of potential references with their URLs and titles
 
 ## Process
-Transform these components into a polished final research report by:
+Based on the section content, create a conclusion and select key references:
 
-1. STRUCTURE AND ORGANIZATION
-   - Follow the provided report structure exactly
-   - Ensure proper hierarchical organization of sections and subsections
-   - Create a coherent narrative flow throughout the entire document
-   - Maintain consistent formatting and style across all sections
-   - Implement appropriate transitions between sections to enhance readability
+1. CONCLUSION GENERATION
+   - Analyze all section content to identify the most significant findings and insights
+   - Synthesize the key themes, patterns, and implications across sections
+   - Highlight the importance and relevance of the research topic
+   - Acknowledge limitations or areas for future research where appropriate
+   - Connect the findings to broader contexts or applications
+   - Provide thoughtful closure that reinforces the value of the research
 
-2. CONTENT INTEGRATION AND ENHANCEMENT
-   - Preserve all technical details, examples, and evidence from section content
-   - Ensure consistency in terminology and concepts across sections
-   - Identify and resolve any contradictions or redundancies between sections
-   - Add cross-references between related concepts in different sections
-   - Ensure comprehensive coverage of all aspects of the research topic
-
-3. ACADEMIC RIGOR AND DEPTH
-   - Maintain precise technical language and domain-specific terminology
-   - Preserve nuance and complexity while ensuring clarity
-   - Ensure all claims are properly supported by evidence or reasoning
-   - Maintain balanced presentation of competing perspectives where relevant
-   - Preserve the depth and detail of specialized information
-
-4. COMPLETENESS AND COMPREHENSIVENESS
-   - Ensure no critical information is omitted or oversimplified
-   - Verify that all subsections described in the report structure are fully addressed
-   - Identify and address any remaining gaps in the integrated content
-   - Ensure appropriate depth of coverage for each topic relative to its importance
-   - Maintain appropriate balance between breadth and depth throughout
+2. REFERENCE SELECTION AND CURATION
+   - Analyze all potential references to identify those most critical to the report
+   - Select 5-6 of the most authoritative, relevant, and current sources
+   - Prioritize references that:
+     * Support key findings or conclusions
+     * Provide foundational concepts or methodologies
+     * Represent diverse perspectives on the topic
+     * Come from reputable and authoritative sources
+     * Offer the most comprehensive or unique insights
+   - Format references in a consistent academic citation style
 
 ## Output
-Produce a final research report that:
-- Begins with an executive summary highlighting key findings and insights
-- Includes a detailed table of contents reflecting the hierarchical structure
-- Features comprehensive section content organized according to the provided structure
-- Contains appropriate introduction and conclusion sections
-- Maintains consistent academic/professional tone and formatting throughout
-- Preserves all technical details, examples, data, and evidence
-- Reads as a cohesive whole rather than a collection of separate sections
+Produce a ConclusionAndReferences object containing:
+- A comprehensive conclusion that synthesizes key insights from the entire report
+- A list of 5-6 carefully selected and formatted references
 
-## Guidelines
-- Format the document as a professional research paper or technical report
-- Use consistent heading levels to reflect the hierarchical structure
-- Maintain appropriate section and subsection numbering
-- Include an executive summary that concisely presents key findings
-- Create a detailed table of contents with page references
-- Ensure logical progression and narrative continuity throughout
-- Preserve technical precision while maintaining readability
-- Use consistent citation format if references are included
-- Include visualizations, tables, or diagrams described in section content
-- Ensure comprehensive coverage without unnecessary repetition
-- Address complex concepts with appropriate depth and nuance
-- Maintain the highest standards of academic and professional writing
+## Conclusion Format
+- should be a markdown formatted string
 
-## Example Structure
 ```
-# [REPORT TITLE]
-
-## Executive Summary
-[Concise overview of key findings and insights]
-
-## Table of Contents
-[Detailed hierarchical listing of all sections and subsections]
-
-## 1. Introduction
-[Context, scope, and purpose of the research]
-
-## 2. [First Major Section]
-### 2.1 [Subsection]
-[Comprehensive content with preserved technical details]
-### 2.2 [Subsection]
-[Comprehensive content with preserved technical details]
-
-## 3. [Second Major Section]
-### 3.1 [Subsection]
-[Comprehensive content with preserved technical details]
-### 3.2 [Subsection]
-[Comprehensive content with preserved technical details]
-
-[Additional sections as specified in the report structure]
-
-## N. Conclusion
-[Summary of key findings, implications, and potential future directions]
-
-## Appendices (if applicable)
-[Supplementary material, methodological details, etc.]
+## Conclusion
+[Conclusion content]
 ```
-"""
+
+## References Format
+- should be a markdown formatted string
+```
+## References
+[References content]
+```
+
+## Guidelines for Conclusion
+- Synthesize rather than summarize; offer insights beyond what individual sections contain
+- Highlight the significance and implications of the research findings
+- Maintain an authoritative and scholarly tone
+- Ensure logical flow and coherence with the report content
+- Include appropriate depth and nuance reflecting the complexity of the topic
+- Avoid introducing new information not covered in the report sections
+- Provide thoughtful closure that leaves readers with a clear understanding of key takeaways
+
+## Guidelines for References
+- Select only the most relevant and important sources (5-6 maximum)
+- Ensure selected references collectively support the main arguments of the report
+- Format consistently according to a standard academic citation style (e.g., APA, MLA)
+- Prioritize credible, authoritative sources over less established ones
+- Select references that collectively cover the breadth of the report topic"""
