@@ -12,6 +12,7 @@ class Configuration:
     max_queries: int = 3
     search_depth: int = 2
     num_reflections: int = 2
+    section_delay_seconds: int = 15
     
     @classmethod
     def from_runnable_config(
