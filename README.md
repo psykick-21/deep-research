@@ -2,15 +2,6 @@
 
 A sophisticated research automation tool that leverages LangChain and LangGraph to conduct in-depth research on any topic. The system uses multiple AI agents working together to gather information, analyze data, and generate comprehensive research reports.
 
-## Features
-
-- Automated research workflow using multiple specialized AI agents
-- Deep web search capabilities using Tavily
-- Structured report generation with customizable sections
-- Human-in-the-loop feedback system
-- Configurable research parameters (depth, temperature, etc.)
-- Detailed logging and progress tracking
-
 ## Prerequisites
 
 - Python 3.12 or higher
@@ -19,22 +10,41 @@ A sophisticated research automation tool that leverages LangChain and LangGraph 
   - OpenAI
   - Anthropic
   - Google AI
-  - Tavily
+  - Tavily (Mandatory)
+
+The API key of the LLM provider is optional based on which model you wish to use.
 
 ## Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/deep-research.git
+git clone https://github.com/psykick-21/deep-research.git
 cd deep-research
 ```
 
-2. Install dependencies using Poetry:
+2. Create a virtual python environment in this repo
+```bash
+conda create -p venv python=3.12 -y
+```
+
+Any other method can also be used to create python environment.
+
+3. Activate python environment
+```bash
+conda activate ./venv
+```
+
+4. Install `poetry` in the environment if you are not using global poetry config
+```bash
+pip install poetry
+```
+
+5. Install dependencies using Poetry:
 ```bash
 poetry install
 ```
 
-3. Create a `.env` file in the project root with your API keys:
+6. Create a `.env` file in the project root with your API keys:
 ```
 OPENAI_API_KEY=your_openai_key
 ANTHROPIC_API_KEY=your_anthropic_key
@@ -44,17 +54,57 @@ TAVILY_API_KEY=your_tavily_key
 
 ## Usage
 
-1. Activate the Poetry virtual environment:
-```bash
-poetry shell
-```
+Change the topic and outline based on your requirements in the `main.py` file.
 
-2. Run the research workflow:
+Run the research workflow:
 ```bash
 python main.py
 ```
 
-The default configuration will research "LLM Benchmarking" with a focus on comparing different LLMs' capabilities, performance, and effectiveness. You can modify the topic and outline in `main.py` to research any subject of your choice.
+Alternatively, you can use `main.ipynb` notebook for a more interactive experience.
+
+## Features
+
+- Automated research workflow using multiple specialized AI agents
+- Deep web search capabilities using Tavily
+- Structured report generation with customizable sections
+- Human-in-the-loop feedback system
+- Configurable research parameters (depth, temperature, etc.)
+- Detailed logging and progress tracking
+
+## Workflow
+
+![Research Workflow](extra/diagram.png)
+
+The research process follows a sophisticated workflow:
+
+1. **Initial Planning Phase**
+   - User provides the research topic and outline
+   - Report Structure Generator creates a detailed outline
+   - Human feedback can be incorporated to refine the structure
+
+2. **Section-wise Research**
+   - The outline is broken down into multiple sections
+   - Each section undergoes a detailed research process:
+     - Utilizes existing LLM knowledge base
+     - Performs targeted web searches
+     - Accumulates and processes search results
+     - Reflects on gathered information
+     - Generates additional search queries based on reflection
+     - Synthesizes final section content
+
+3. **Final Curation**
+   - All sections are combined and refined
+   - Final report is generated with proper formatting and structure
+
+The system employs a recursive improvement loop where each section's research can trigger multiple rounds of:
+- Web searches
+- Knowledge base consultation
+- Result accumulation
+- Reflection
+- Additional query generation
+
+This ensures comprehensive coverage of the topic while maintaining coherence and depth in the research.
 
 ## Project Structure
 
