@@ -476,8 +476,7 @@ def finalizer_node(state: AgentState, config: RunnableConfig):
     final_report = "\n\n".join([section_content for section_content in state["final_section_content"]])
     final_report += "\n\n" + result.conclusion
     final_report += "\n\n# References\n\n" + "\n".join(["- "+reference for reference in result.references])
-    final_report = f"# {state['topic']}" + final_report
-
+    
     with open(f"reports/{state['topic']}.md", "w", encoding="utf-8") as f:
         f.write(final_report)
 
