@@ -389,6 +389,9 @@ Produce detailed, comprehensive, well-structured section content that:
 [Supporting evidence, examples, or case studies]
 
 [Additional subheadings as needed]
+
+## REMEMBER
+- REMEMBER NOT TO CREATE CONCLUSION OR REFERENCES
 """
 
 
