@@ -37,7 +37,6 @@ def main():
         elif "section_formatter" in event:
             pass
         elif "research_agent" in event:
-            # check output of research_agent
             pass
         elif "human_feedback" in event:
             print("<<< HUMAN FEEDBACK >>>")
